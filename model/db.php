@@ -2,7 +2,7 @@
     $server = 'localhost';
     $user = 'root';
     $pass = '';
-    $mydb = 'quanlynhahang';
+    $mydb = 'qlnhahang';
     $connect = mysqli_connect($server, $user, $pass);
     if (!$connect) {
         die ("Cannot connect to $server using $user");
