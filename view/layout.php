@@ -2,6 +2,7 @@
     <head>
         <Title>Wibu Restaurant</Title>
         <link rel="stylesheet" href="../css/layout.css">
+        <link rel="shortcut icon" href="../images/icon.png">
         <style>
             body{
                 width: 100%;
