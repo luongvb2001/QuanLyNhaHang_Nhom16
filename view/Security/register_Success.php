@@ -1,3 +1,6 @@
+<?php
+    require_once('../../controller/Security/auth.php');
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,7 +10,7 @@
     </head>
     <body>
         <div class="form">
-            <p class="message">Đăng ký thành công <a href="register.php">Đăng nhập lại</a></p>
+            <p class="message">Đăng ký thành công <a href="login.php">Đăng nhập lại</a></p>
 </div>
     </body>
 </html>
