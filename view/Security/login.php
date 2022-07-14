@@ -13,7 +13,6 @@
                     <input type="text" name='txtUsername' placeholder="username"/>
                     <input type="password" name='txtPassword' placeholder="password"/>
                     <button>Login</button>
-                    <p class="message">Not registered? <a href="register.php">Create an account</a></p>
                 </form>
             </div>
         </div>        
