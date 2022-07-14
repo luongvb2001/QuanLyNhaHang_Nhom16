@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        <title>Login</title>
         <link rel="stylesheet" href="../../css/login.css">
         <script src="../js/index.js"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
