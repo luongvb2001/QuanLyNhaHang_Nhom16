@@ -1,6 +1,3 @@
-<?php
-    require_once('../../controller/Security/auth.php');
-?>
 <!DOCTYPE html>
 <html>
     <head>
