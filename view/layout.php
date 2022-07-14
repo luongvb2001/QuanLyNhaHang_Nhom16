@@ -9,6 +9,7 @@
                 box-sizing: border-box;
                 background: url("../images/background.jpg");
                 background-size: cover;
+                background-attachment: fixed;
             }
         </style>
     </head>
