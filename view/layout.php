@@ -26,6 +26,4 @@
             </ul>
         </nav>
     </body>
-    <footer>
-    </footer>
 </html>

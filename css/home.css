@@ -1,4 +1,7 @@
 *{
-    color: aliceblue;
+    color: aqua;
     font-family: 'Roboto', sans-serif;
+}
+.container-home{
+    margin-top: 100px;
 }
