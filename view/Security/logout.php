@@ -12,6 +12,7 @@ if (isset($_SESSION['username'])){
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" href="../../css/login.css">
+        <link rel="shortcut icon" href="../../images/icon.png">
         <title>Logout</title>
     </head>
     <body>
