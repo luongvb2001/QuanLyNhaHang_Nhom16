@@ -1,7 +1,92 @@
 *{
-    color: aqua;
+    
     font-family: 'Roboto', sans-serif;
 }
 .container-home{
     margin-top: 100px;
 }
+
+.container{
+    margin-top: 100px;
+    width: 100%;
+    height: 700px;
+    padding: 1rem;
+    background-color: #aab7cf;
+  }
+  .container_statistic{
+    width: 80%;
+    height: max-content;
+    margin-left: 10%;
+    margin-right: 10%;
+    background-color: #aab7cf;
+    justify-content: center;
+  }
+  
+  #container_1{
+    width: 49%;
+    height: 650px;
+    float: left;
+    background-color: #aab7cf;
+  }
+  #container_2{
+    height: 690px;
+    width: 50%;
+    float: right;
+    /* font-size: small; */
+  }
+  
+  
+  .btn_ban{
+    width: 110px;
+    height: 110px;
+    padding: auto;
+    color: green;
+  }
+  .btn_matrix{
+    font-size: 16px;
+    line-height: 24px;
+    width: 100%;
+  }
+  
+  
+  /* css nền bàn */
+  .tab-content{
+    background-color: #c4cbd8;
+  }
+  
+  /* css nền menu */
+  .tab-pane fade{
+    background-color: #ced5e0;
+  }
+  /* css nền hóa đơn */
+  
+  .navbar {
+      background-color: rgb(184, 70, 70);
+      font-size: 1em;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      color: #ffffff;
+      padding: 20px 10px 20px 10px;
+      text-align: left;
+  }
+  
+  .navbar a {
+      text-decoration: none;
+      color: inherit;
+  }
+  
+  .navbar-brand {
+      font-size: 1.2em;
+      font-weight: 600;
+  }
+  
+  .navbar-item {
+      font-variant: small-caps;
+      margin-left: 30px;
+      
+  }
+  
+  .body-content {
+      padding: 5px;
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      height: max-content;
+  }
