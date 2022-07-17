@@ -1,12 +1,10 @@
-<?php
-// require_once('../controller/auth.php');
-?>
 <?php include_once("../model/db.php") ?>
 <?php include_once("layout.php") ?>
 <html>
 
 <head>
     <link rel="stylesheet" href="../css/home.css">
+    <script src="../js/home.js"></script>
 </head>
 
 <body>
@@ -14,14 +12,14 @@
     <div class="container-home">
         <div id="container_1">
             <div>
-                <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Danh Sách Bàn</button>
-                    <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Menu</button>
+                <div>
+                    <button onclick="show_DsBan()" class="btn_menu" >Danh Sách Bàn</button>
+                    <button onclick="show_Menu()" class="btn_menu" >Menu</button>
                 </div>
             </div>
             <div class="tab-content" id="nav-tabContent">
                 <!-- Content Danh sách bàn -->
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div style="height: 630px; overflow:auto;" class="btn_matrix" role="group" aria-label="Three Column Button Matrix">
                         <form action="" method="post">
                             <?php
@@ -29,7 +27,7 @@
                             $result = $connect->query($sql);
                             while ($row = $result->fetch_assoc()) {
                             ?>
-                                <button id="ban<?php echo $row["SO_BAN"] ?>" style="margin:5px; " type="submit" class="btn btn-outline-primary btn_ban" value='<?php echo $row["SO_BAN"] ?>' name="choose_ban">
+                                <button id="ban<?php echo $row["SO_BAN"] ?>" style="margin:5px; " type="submit" class="btn_ban" value='<?php echo $row["SO_BAN"] ?>' name="choose_ban">
                                     <p style="float: left; margin: 0;font-weight: bold"> <?php echo $row["SO_BAN"] ?> </p>
                                     <?php
                                     if ($row["TRANG_THAI"] == 0) {
@@ -46,24 +44,22 @@
                 </div>
 
                 <!-- danh sách thực đơn -->
-                <div style="overflow:auto; height: 630px" class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                    <nav>
+                <div style="overflow:auto; height: 630px; display: none" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                    <div>
                         <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-menu1" type="button" role="tab" aria-controls="nav-menu1" aria-selected="true">Khai vị</button>
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-menu2" type="button" role="tab" aria-controls="nav-menu2" aria-selected="false">Món chính</button>
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-menu3" type="button" role="tab" aria-controls="nav-menu3" aria-selected="false">Hoa quả</button>
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-menu4" type="button" role="tab" aria-controls="nav-menu4" aria-selected="false">Thức uống</button>
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-menudb" type="button" role="tab" aria-controls="nav-menudb" aria-selected="false">Đặc biệt</button>
+                            <button onclick="show_Menu1()">Khai vị</button>
+                            <button onclick="show_Menu2()">Món chính</button>
+                            <button onclick="show_Menu3()">Hoa quả</button>
+                            <button onclick="show_Menu4()">Thức uống</button>
                         </div>
-                    </nav>
+                    </div>
                     <div class="tab-content" id="nav-tabMenuContent">
-                        <div class="tab-pane fade show active" id="nav-menu1" role="tabpanel" aria-labelledby="nav-menu1-tab">
+                        <div id="menu1">
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width :10%">Mã</th>
                                         <th scope="col" style="width :40%">Tên</th>
-                                        <!-- <th scope="col" style="width :20%">Đơn vị</th> -->
                                         <th scope="col" style="width :20%">Giá</th>
                                         <th scope="col" style="width :10%">Chọn</th>
                                     </tr>
@@ -80,7 +76,7 @@
                                             <tr>
                                                 <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
                                                 <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                                <td style="width :40%"><?php echo $row["DON_GIA"]; ?></td>
+                                                <td style="width :40%"><?php echo $row["GIA"]; ?></td>
                                                 <td style="width :10%">
                                                     <button id="addMeal{{mon.ten_mon}}" onclick="addMealFunction('{{mon.ma_mon}}', '{{mon.ten_mon}}', '{{mon.gia}}')" class="add_mon">Add</button>
                                                 </td>
@@ -90,13 +86,12 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-menu2" role="tabpanel" aria-labelledby="nav-menu2-tab">
+                        <div id="menu2" >
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width :10%">Mã</th>
                                         <th scope="col" style="width :40%">Tên</th>
-                                        <!-- <th scope="col" style="width :20%">Đơn vị</th> -->
                                         <th scope="col" style="width :20%">Giá</th>
                                         <th scope="col" style="width :10%">Chọn</th>
                                     </tr>
@@ -113,7 +108,7 @@
                                             <tr>
                                                 <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
                                                 <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                                <td style="width :40%"><?php echo $row["DON_GIA"]; ?></td>
+                                                <td style="width :40%"><?php echo $row["GIA"]; ?></td>
                                                 <td style="width :10%">
                                                     <button id="addMeal{{mon.ten_mon}}" onclick="addMealFunction('{{mon.ma_mon}}', '{{mon.ten_mon}}', '{{mon.gia}}')" class="add_mon">Add</button>
                                                 </td>
@@ -123,13 +118,12 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-menu3" role="tabpanel" aria-labelledby="nav-menu3-tab">
+                        <div id="menu3" >
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width :10%">Mã</th>
                                         <th scope="col" style="width :40%">Tên</th>
-                                        <!-- <th scope="col" style="width :20%">Đơn vị</th> -->
                                         <th scope="col" style="width :20%">Giá</th>
                                         <th scope="col" style="width :10%">Chọn</th>
                                     </tr>
@@ -146,7 +140,7 @@
                                             <tr>
                                                 <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
                                                 <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                                <td style="width :40%"><?php echo $row["DON_GIA"]; ?></td>
+                                                <td style="width :40%"><?php echo $row["GIA"]; ?></td>
                                                 <td style="width :10%">
                                                     <button id="addMeal{{mon.ten_mon}}" onclick="addMealFunction('{{mon.ma_mon}}', '{{mon.ten_mon}}', '{{mon.gia}}')" class="add_mon">Add</button>
                                                 </td>
@@ -156,13 +150,12 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="tab-pane fade" id="nav-menu4" role="tabpanel" aria-labelledby="nav-menu4-tab">
+                        <div id="menu4" >
                             <table class="table">
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width :10%">Mã</th>
                                         <th scope="col" style="width :40%">Tên</th>
-                                        <!-- <th scope="col" style="width :20%">Đơn vị</th> -->
                                         <th scope="col" style="width :20%">Giá</th>
                                         <th scope="col" style="width :10%">Chọn</th>
                                     </tr>
@@ -179,7 +172,7 @@
                                             <tr>
                                                 <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
                                                 <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                                <td style="width :40%"><?php echo $row["DON_GIA"]; ?></td>
+                                                <td style="width :40%"><?php echo $row["GIA"]; ?></td>
                                                 <td style="width :10%">
                                                     <button id="addMeal{{mon.ten_mon}}" onclick="addMealFunction('{{mon.ma_mon}}', '{{mon.ten_mon}}', '{{mon.gia}}')" class="add_mon">Add</button>
                                                 </td>

@@ -1,3 +1,7 @@
+<?php
+    require_once('../controller/auth.php');
+?>
+
 <html>
     <head>
         <Title>Wibu Restaurant</Title>
