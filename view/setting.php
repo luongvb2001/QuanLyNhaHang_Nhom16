@@ -14,8 +14,23 @@
     <script src="../js/setting.js"></script>
 </head>
 <body>
+    <div class="container">
+        <div class="slibar">
+            <button class="slibar_button" onclick="show_Edit_MonAn()">
+                <span>Update_MonAn</span>
+            </button>
+            <button class="slibar_button">
+                <span>Update_Member</span>
+            </button>
+            <button class="slibar_button">
+                <a href="../view/Security/register.php">Register</a>
+            </button>
+        </div>
+
+    </div>
+
     <div class="table">
-    <table>
+    <table id="table_edit_monan">
         <thead>
             <tr>
                 <th>Tên Menu</th>
@@ -255,5 +270,4 @@
                 </div>
         <?php endforeach ?>
     </div>
-    <a href="../view/Security/register.php">Register</a>
 </body>

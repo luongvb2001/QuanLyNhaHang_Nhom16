@@ -1,3 +1,6 @@
+function show_Edit_MonAn(){
+    document.getElementById('table_edit_monan').style.display="table";
+}
 function showTable1(){
     document.getElementById('mon_phu').style.display = "table";
     document.getElementById('mon_chinh').style.display = "none";
