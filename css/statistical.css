@@ -2,7 +2,7 @@
     margin: 80px 15% 200px;
     position: fixed;
     width: 70%;
-    background-color: #fff;
+    background-color: #328fa8;
     border-radius: 10px;
 }
 
@@ -30,14 +30,14 @@
 .chart-container1{
     grid-column-start: 1;
     grid-column-end:   3;
-    background-color: #ccc;
+    background-color: #fff;
     margin: 0 20px 20px;
     border-radius: 8px;
 }
 
 .chart-container2{
     margin-bottom: 20px;
-    background-color: #ccc;
+    background-color: #fff;
     margin-left: 20px;
     border-radius: 8px;
 }
@@ -45,7 +45,7 @@
 .chart-container3{
     margin-right: 20px;
     margin-bottom: 20px;
-    background-color: #ccc;
+    background-color: #fff;
     border-radius: 8px;
 }
 
