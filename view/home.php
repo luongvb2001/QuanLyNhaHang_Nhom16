@@ -1,5 +1,9 @@
 <?php include_once("../model/db.php") ?>
 <?php include_once("layout.php") ?>
+<?php 
+    require('../controller/homeController.php');  
+    $KHs = get_KH();
+    ?>
 <html>
 
 <head>
@@ -186,11 +190,16 @@
             <div class="col">
               <p style="font-weight: bold;margin: 3px">Số bàn : <?php echo $row["SO_BAN"] ?> </p>
               <p style="font-weight: bold;margin: 3px">Họ tên: {{hotenkhachhang}}</p>
-              <p style="font-weight: bold;margin: 3px"> Số ĐT:<input id="inputttkh" style="width:40%;border-radius:5px" name="thong_tin_khach_hang" type="text " value="{{thongtinkhachhang}}">
-                <button onclick="searchHFunction()" style="border-radius:5px;margin: 3px" type="submit" value='{{so_ban}}' name="search_infor_kh" id= "search">
-                  <img style="width:20px; " src="\static\images\icon-search.png" alt="Search" >
-                </button> 
-              </p>
+                                              <div style ="display: flex">
+                                <p style="font-weight: bold;margin: 3px">Khách hàng: </p>
+                                <input list="Khach_Hang">
+                                <datalist id="Khach_Hang">
+                                <?php foreach ($KHs as $KH) : ?>
+                                            <?php if($KH['DEL'] == 0) { ?>
+                                                <option value="<?= $KH['TEN_KHACH_HANG']; ?> -<?= $KH['SO_DIEN_THOAI']; ?>">
+                                            <?php } endforeach; ?>
+                                </datalist> 
+                                </div>
             </div>
             <div class="col">
               <p style="font-weight: bold;margin: 3px">Mã hóa đơn : {{hoadon.ma_hoa_don}}</p>
