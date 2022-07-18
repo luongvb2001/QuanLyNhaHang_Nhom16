@@ -189,17 +189,16 @@
           <div class="row">
             <div class="col">
               <p style="font-weight: bold;margin: 3px">Số bàn : <?php echo $row["SO_BAN"] ?> </p>
-              <p style="font-weight: bold;margin: 3px">Họ tên: {{hotenkhachhang}}</p>
-                                              <div style ="display: flex">
-                                <p style="font-weight: bold;margin: 3px">Khách hàng: </p>
-                                <input list="Khach_Hang">
-                                <datalist id="Khach_Hang">
-                                <?php foreach ($KHs as $KH) : ?>
-                                            <?php if($KH['DEL'] == 0) { ?>
-                                                <option value="<?= $KH['TEN_KHACH_HANG']; ?> -<?= $KH['SO_DIEN_THOAI']; ?>">
-                                            <?php } endforeach; ?>
-                                </datalist> 
-                                </div>
+                <div style ="display: flex">
+                <p style="font-weight: bold;margin: 3px">Khách hàng: </p>
+                <input list="Khach_Hang">
+                <datalist id="Khach_Hang">
+                <?php foreach ($KHs as $KH) : ?>
+                            <?php if($KH['DEL'] == 0) { ?>
+                                <option value="<?= $KH['TEN_KHACH_HANG']; ?> -<?= $KH['SO_DIEN_THOAI']; ?>">
+                            <?php } endforeach; ?>
+                </datalist> 
+                </div>
             </div>
             <div class="col">
               <p style="font-weight: bold;margin: 3px">Mã hóa đơn : {{hoadon.ma_hoa_don}}</p>
