@@ -170,7 +170,6 @@
                 </div>
             </div>
         </div>
-        
 
         <div id="container_2">
     <div>
