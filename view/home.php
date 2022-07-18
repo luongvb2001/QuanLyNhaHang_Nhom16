@@ -3,6 +3,10 @@
 <?php 
     require('../controller/homeController.php');  
     $KHs = get_KH();
+    $choose_ban = '';
+    if(isset($_POST['choose_ban'])){
+        $choose_ban = $_POST['choose_ban'];
+    }
     ?>
 <html>
 
@@ -188,7 +192,7 @@
           <input hidden id="ipid" name="ipname" value="69">
           <div class="row">
             <div class="col">
-              <p style="font-weight: bold;margin: 3px">Số bàn : <?php echo $row["SO_BAN"] ?> </p>
+              <p style="font-weight: bold;margin: 3px">Số bàn : <?php echo $choose_ban ?> </p>
                 <div style ="display: flex">
                 <p style="font-weight: bold;margin: 3px">Khách hàng: </p>
                 <input list="Khach_Hang">
