@@ -183,7 +183,6 @@
     <div>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active"  data-bs-toggle="tab" data-bs-target="#nav-home-bill" type="button" role="tab" aria-controls="nav-home-bill" aria-selected="true">Hóa đơn</button>
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-home-booking" type="button" role="tab" aria-controls="nav-home-booking" aria-selected="false">Lịch đặt</button>
       </div>
     </div>
     <div style="padding: 15px; height:630px;overflow:auto" class="tab-content" id="nav-tabContent">
@@ -205,7 +204,16 @@
                 </div>
             </div>
             <div class="col">
-              <p style="font-weight: bold;margin: 3px">Mã hóa đơn : {{hoadon.ma_hoa_don}}</p>
+              <p style="font-weight: bold;margin: 3px">Mã hóa đơn : 
+              <?php
+                    $mahoadon = "SELECT MA_HOA_DON
+                            FROM ban 
+                            WHERE ban.SO_BAN = $choose_ban 
+                            and ban.TRANG_THAI = 1";
+                    $result = $connect->query($mahoadon);
+                    while ($row = $result->fetch_assoc()) {
+                    echo $row["MA_HOA_DON"];}
+                ?></p>
             </div>
           </div>
           <table style="margin: 0" class="table">
@@ -223,30 +231,37 @@
             <table class="table">
               <tbody  id="bang_hoa_don">
               <?php
-                    $menu = "SELECT mon_an.TEN_MON, dat_mon.SO_LUONG, mon_an.GIA FROM dat_mon, mon_an WHERE dat_mon.MA_MON = mon_an.MA_MON" ;
+                    $menu = "SELECT mon_an.TEN_MON, dat_mon.SO_LUONG, mon_an.GIA 
+                            FROM dat_mon, mon_an, ban 
+                            WHERE dat_mon.MA_MON = mon_an.MA_MON 
+                            and ban.MA_HOA_DON = dat_mon.MA_HOA_DON 
+                            and ban.SO_BAN = $choose_ban 
+                            and ban.TRANG_THAI = 1";
                     $result = $connect->query($menu);
                     while ($row = $result->fetch_assoc()) {
                 ?>
                   <tr >
-                    <!-- <td style="width :30%" class="ten__mon"><?php echo $row["TEN_MON"]; ?></td>
+                    <td style="width :30%" class="ten__mon"><?php echo $row["TEN_MON"]; ?></td>
                     <td style="width :20%" class="so__luong"><?php echo $row["SO_LUONG"]; ?></td>
                     <td style="width :20%" class="gia__mon"><?php echo $row["GIA"]; ?></td>
                     <td style="width :20%" class="thanh__tien"> <?php echo $row["GIA"]*$row["SO_LUONG"]; ?></td>
-                    <td style="width :10%"></td> -->
+                    <td style="width :10%"></td>
                   </tr>   
                   <?php } ?>                   
               </tbody>
             </table>
           </div>
           <div style="height: 190px; margin-top: 15px">
-            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng tiền: 
-              {% if hoadon.tre_em == "yes"%}
-                <input hidden name="tt" value="{{tong_tien_tre_em}}"> 
-                  {{tong_tien_tre_em}}
-              {% else %}
-                {{hoadon.don_gia}}
-                <input hidden name="tt" value="{{hoadon.don_gia}}"> 
-              {% endif %}
+            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng tiền: <?php
+                    $sum = "SELECT hoa_don.DON_GIA
+                            FROM hoa_don, ban 
+                            WHERE hoa_don.MA_HOA_DON = ban.MA_HOA_DON
+                            and ban.SO_BAN = $choose_ban 
+                            and ban.TRANG_THAI = 1";
+                    $result = $connect->query($sum);
+                    while ($row = $result->fetch_assoc()) {
+                    echo $row["DON_GIA"];}
+                ?>
             </div>
             <button onclick="saveHFunction()" class="save_del_pay" type="submit" value='{{so_ban}}' name="add_hoa_don" id="luuhoadon1">Lưu hóa đơn</button>
             <button class="save_del_pay" type="submit" value='{{hoadon.ma_hoa_don}}' name="remove_hoa_don" id="xoahoadon1">Xóa hóa đơn</button> 
