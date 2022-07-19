@@ -92,3 +92,16 @@
       font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       height: max-content;
   }
+
+table, th, td{
+  border-top:1px solid #ccc;
+  border-bottom:1px solid #ccc;
+}
+table{
+    border-collapse:collapse;
+    width:100%;
+}
+th, td{
+    text-align:left;
+    padding:10px;
+}

@@ -11,7 +11,7 @@
 .slibar_button{
     margin-top: 1px; 
     background-color: #fff;
-    margin-left: 88%;
+    margin-left: 86.5%;
     margin-top: 5px;
     margin-bottom: 5px;
     width: 125px;
@@ -32,7 +32,7 @@
 .chart-container1{
     grid-column-start: 1;
     grid-column-end:   3;
-    background-color: rgb(150, 25, 25);
+    background-color: #fff;
     margin: 0 20px 20px;
     border-radius: 8px;
 
@@ -54,6 +54,7 @@
 
 p{
     text-align: center;
+    margin: 5px auto;
 }
 #div2{
     display: none;

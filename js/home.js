@@ -36,6 +36,8 @@ function show_Menu4(){
     document.getElementById('menu4').style.display = "table";
 }
 
+
+
 function addMealFunction(ma_mon, tenmon, giamon) {
     mamon= "'"+ ma_mon +"'";
     tm=",'"+ tenmon +"'";
@@ -59,11 +61,17 @@ function addMealFunction(ma_mon, tenmon, giamon) {
     +')" >Del</button> </td>'
     + ' </tr>';
     document.getElementById("addMeal"+tenmon).disabled= true;
-    document.getElementById('bang_hoa_don').insertAdjacentHTML('afterend', html);
-    document.getElementById("addMeal"+tenmon+"db").disabled= true;
+    document.getElementById("bang_hoa_don").insertAdjacentHTML('afterend', html);
+    // document.getElementById("addMeal"+tenmon+"db").disabled= true;
     
 }
 
+function deleteMealFunction(idMeal, tenmon) {
+    var element = document.getElementById("idMeal"+idMeal);
+    element.parentNode.removeChild(element);
+    document.getElementById("addMeal"+tenmon).disabled= false;
+    document.getElementById("addMeal"+tenmon+"db").disabled= false;
+}
 function useHFunction(){
     document.homeForm.ipname.value= 96;
 }
@@ -72,4 +80,13 @@ function saveHFunction(){
 }
 function searchHFunction(){
     document.homeForm.ipname.value= 99;
+}
+function useTFunction(){
+    document.take_awayForm.ipname.value= 96;
+}
+function saveTFunction(){
+    document.take_awayForm.ipname.value= 66;
+}
+function searchTFunction(){
+    document.take_awayForm.ipname.value= 99;
 }

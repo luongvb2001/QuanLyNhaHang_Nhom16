@@ -30,7 +30,7 @@
                         <!-- <img src="../image/anh_vipmember .jpg" class="vip_image_member" /> -->
                         <div class="vipmember_image">
                             <img src="../images/vipmember.png" 
-                            alt="2H8l7.png" style="width: 98%; height: 55%; margin-top :20px">
+                            alt="2H8l7.png" style="width: 94%; height: 55%; margin-top :20px; margin-left: 10px">
                         </div>
                     </div>
                 </div>

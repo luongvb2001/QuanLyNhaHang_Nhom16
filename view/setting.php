@@ -250,7 +250,7 @@
             </table>
 
             <div id="get_member" class="list_item_admin">
-                <h2>Thay Đổi Thông Tin Cá Nhân</h2>
+                <h2 class="h2">Thay Đổi Thông Tin Cá Nhân</h2>
                 <?php foreach ($member as $mb) :  ?>
                     <form action="" method="post">
                         <div class="list_member_item">
