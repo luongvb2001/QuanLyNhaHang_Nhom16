@@ -204,7 +204,16 @@
                 </div>
             </div>
             <div class="col">
-              <p style="font-weight: bold;margin: 3px">Mã hóa đơn : {{hoadon.ma_hoa_don}}</p>
+              <p style="font-weight: bold;margin: 3px">Mã hóa đơn : 
+              <?php
+                    $mahoadon = "SELECT MA_HOA_DON
+                            FROM ban 
+                            WHERE ban.SO_BAN = $choose_ban 
+                            and ban.TRANG_THAI = 1";
+                    $result = $connect->query($mahoadon);
+                    while ($row = $result->fetch_assoc()) {
+                    echo $row["MA_HOA_DON"];}
+                ?></p>
             </div>
           </div>
           <table style="margin: 0" class="table">
@@ -243,14 +252,16 @@
             </table>
           </div>
           <div style="height: 190px; margin-top: 15px">
-            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng tiền: 
-              {% if hoadon.tre_em == "yes"%}
-                <input hidden name="tt" value="{{tong_tien_tre_em}}"> 
-                  {{tong_tien_tre_em}}
-              {% else %}
-                {{hoadon.don_gia}}
-                <input hidden name="tt" value="{{hoadon.don_gia}}"> 
-              {% endif %}
+            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng tiền: <?php
+                    $sum = "SELECT hoa_don.DON_GIA
+                            FROM hoa_don, ban 
+                            WHERE hoa_don.MA_HOA_DON = ban.MA_HOA_DON
+                            and ban.SO_BAN = $choose_ban 
+                            and ban.TRANG_THAI = 1";
+                    $result = $connect->query($sum);
+                    while ($row = $result->fetch_assoc()) {
+                    echo $row["DON_GIA"];}
+                ?>
             </div>
             <button onclick="saveHFunction()" class="save_del_pay" type="submit" value='{{so_ban}}' name="add_hoa_don" id="luuhoadon1">Lưu hóa đơn</button>
             <button class="save_del_pay" type="submit" value='{{hoadon.ma_hoa_don}}' name="remove_hoa_don" id="xoahoadon1">Xóa hóa đơn</button> 
