@@ -7,7 +7,7 @@ if(isset($_POST["action"]))
 	if($_POST["action"] == 'fetch1')
 	{
 		$query1 = "
-            SELECT NGAY_LAP, SUM(DON_GIA) AS Total
+            SELECT day(NGAY_LAP) as ngaylap, SUM(DON_GIA) AS Total
             FROM hoa_don
             WHERE month(NGAY_LAP) = month(CURDATE())
             GROUP BY NGAY_LAP;
@@ -20,7 +20,7 @@ if(isset($_POST["action"]))
 		foreach($result1 as $row)
 		{
 			$data1[] = array(
-				'language'		=>	$row["NGAY_LAP"],
+				'language'		=>	$row["ngaylap"],
 				'total'			=>	$row["Total"],
 				'color'			=>	'#' . rand(100000, 999999) . ''
 			);
