@@ -183,7 +183,6 @@
     <div>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active"  data-bs-toggle="tab" data-bs-target="#nav-home-bill" type="button" role="tab" aria-controls="nav-home-bill" aria-selected="true">Hóa đơn</button>
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-home-booking" type="button" role="tab" aria-controls="nav-home-booking" aria-selected="false">Lịch đặt</button>
       </div>
     </div>
     <div style="padding: 15px; height:630px;overflow:auto" class="tab-content" id="nav-tabContent">
@@ -223,16 +222,21 @@
             <table class="table">
               <tbody  id="bang_hoa_don">
               <?php
-                    $menu = "SELECT mon_an.TEN_MON, dat_mon.SO_LUONG, mon_an.GIA FROM dat_mon, mon_an WHERE dat_mon.MA_MON = mon_an.MA_MON" ;
+                    $menu = "SELECT mon_an.TEN_MON, dat_mon.SO_LUONG, mon_an.GIA 
+                            FROM dat_mon, mon_an, ban 
+                            WHERE dat_mon.MA_MON = mon_an.MA_MON 
+                            and ban.MA_HOA_DON = dat_mon.MA_HOA_DON 
+                            and ban.SO_BAN = $choose_ban 
+                            and ban.TRANG_THAI = 1";
                     $result = $connect->query($menu);
                     while ($row = $result->fetch_assoc()) {
                 ?>
                   <tr >
-                    <!-- <td style="width :30%" class="ten__mon"><?php echo $row["TEN_MON"]; ?></td>
+                    <td style="width :30%" class="ten__mon"><?php echo $row["TEN_MON"]; ?></td>
                     <td style="width :20%" class="so__luong"><?php echo $row["SO_LUONG"]; ?></td>
                     <td style="width :20%" class="gia__mon"><?php echo $row["GIA"]; ?></td>
                     <td style="width :20%" class="thanh__tien"> <?php echo $row["GIA"]*$row["SO_LUONG"]; ?></td>
-                    <td style="width :10%"></td> -->
+                    <td style="width :10%"></td>
                   </tr>   
                   <?php } ?>                   
               </tbody>
