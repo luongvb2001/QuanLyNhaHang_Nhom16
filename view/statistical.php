@@ -23,15 +23,15 @@
 		<div id="div1">
 			<div class="wrapper">
 				<div class="chart-container1">
-					<canvas id="bar1" class="bar_chart1" style="max-height:250px; width:100%; max-width:60%; margin: 20px auto;"></canvas>
+					<canvas id="bar1" class="bar_chart1" style="max-height:217px; width:100%; max-width:55%; margin: 20px auto;"></canvas>
 					<p>Biểu đồ đường doanh thu của nhà hàng theo ngày trong tháng</p>
 				</div>
 				<div class="chart-container2 ">
-					<canvas id="doughnut_chart1" style="width:100%;"></canvas>
+					<canvas id="doughnut_chart1" style="width:100%;  max-height:253px;"></canvas>
 					<p>Biểu đồ tròn về số lượng tỷ lệ số lượng các món</p>
 				</div>
 				<div class="chart-container3">
-					<canvas id="pie_chart1" style="width:100%;"></canvas>
+					<canvas id="pie_chart1" style="width:100%; max-height:253px;"></canvas>
 					<p>Biểu đồ tròn về thu nhập từng món mang lại</p>
 				</div>
 			</div>
@@ -40,7 +40,7 @@
 		<div id="div2">
 			<div class="wrapper">
 				<div class="chart-container1">
-					<canvas id="bar2" class="bar_chart1" style="max-height:250px; width:100%; max-width:60%; margin: 20px auto; color: #ccc"></canvas>
+					<canvas id="bar2" class="bar_chart1" style="max-height:217px; width:100%; max-width:55%; margin: 20px auto; color: #ccc"></canvas>
 					<p>Biểu đồ đường doanh thu của nhà hàng theo tháng trong năm</p>
 				</div>
 				<div class="chart-container2">
@@ -57,7 +57,7 @@
 		<div id="div3">
 			<div class="wrapper">
 				<div class="chart-container1">
-					<canvas id="bar3" class="bar_chart1" style="max-height:250px; width:100%; max-width:60%; margin: 20px auto;"></canvas>
+					<canvas id="bar3" class="bar_chart1" style="max-height:217px; width:100%; max-width:55%; margin: 20px auto;"></canvas>
 					<p>Biểu đồ đường doanh thu của nhà hàng theo các năm</p>
 				</div>
 				<div class="chart-container2">

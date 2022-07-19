@@ -32,7 +32,7 @@
 .chart-container1{
     grid-column-start: 1;
     grid-column-end:   3;
-    background-color: rgb(150, 25, 25);
+    background-color: #fff;
     margin: 0 20px 20px;
     border-radius: 8px;
 
@@ -54,6 +54,7 @@
 
 p{
     text-align: center;
+    margin: 5px auto;
 }
 #div2{
     display: none;
