@@ -94,8 +94,8 @@
   }
 
 table, th, td{
-  border-top:1px solid #ccc;
-  border-bottom:1px solid #ccc;
+  border-top:1px solid black;
+  border-bottom:1px solid black;
 }
 table{
     border-collapse:collapse;
