@@ -33,7 +33,7 @@
         if(!strcmp($rank1, "Vàng")) $giam1 = 0.15;
         }
         $tong_tien =0;
-        if(isset($_POST['so_luong'][0])){
+        if(isset($_POST['so_luongs'][0])){
         for ($x = 0; $x <= sizeof($_POST["so_luongs"]); $x++) {
             $tong_tien+= $_POST["so_luongs"][$x]*$_POST["gia_mons"][$x];
 
@@ -116,8 +116,8 @@
                         <div>
                             <button onclick="show_Menu1()">Khai vị</button>
                             <button onclick="show_Menu2()">Món chính</button>
-                            <button onclick="show_Menu3()">Hoa quả</button>
-                            <button onclick="show_Menu4()">Thức uống</button>
+                            <button onclick="show_Menu3()">Đồ uống</button>
+                            <button onclick="show_Menu4()">Hoa quả</button>
                         </div>
                     </div>
                     <div class="tab-content" id="nav-tabMenuContent">
