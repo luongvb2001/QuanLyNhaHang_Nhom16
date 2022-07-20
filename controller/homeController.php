@@ -91,4 +91,17 @@
         return $courses;
     }
 
+    function get_ban($ma_ban){
+        global $db;
+        $query = 'SELECT *
+        FROM ban
+        WHERE SO_BAN = :ma_ban';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':ma_ban', $ma_ban);
+        $statement->execute();
+        $courses = $statement->fetch();
+        $statement->closeCursor();
+        return $courses;
+    }
+
 ?>
