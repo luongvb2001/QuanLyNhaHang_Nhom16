@@ -77,15 +77,15 @@
     <div class="container-home">
         <div id="container_1">
             <div>
-                <div>
+                <div style = "width:100%">
                     <button onclick="show_DsBan()" class="btn_menu" >Danh Sách Bàn</button>
                     <button onclick="show_Menu()" class="btn_menu" >Menu</button>
                 </div>
             </div>
             <div class="tab-content" id="nav-tabContent">
                 <!-- Content Danh sách bàn -->
-                <div id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                    <div style="height: 630px; overflow:auto;" class="btn_matrix" role="group" aria-label="Three Column Button Matrix">
+                <div id="nav-home">
+                    <div style="height: 580px; overflow:auto;" class="btn_matrix">
                         <form action="" method="post">
                             <?php
                             $sql = "SELECT * FROM ban";
@@ -111,7 +111,7 @@
                 </div>
 
                 <!-- danh sách thực đơn -->
-                <div style="overflow:auto; height: 630px; display: none" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div style="overflow:auto; height: 580px; display: none" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                     <div>
                         <div>
                             <button onclick="show_Menu1()">Khai vị</button>
