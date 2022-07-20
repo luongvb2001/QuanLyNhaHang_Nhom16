@@ -2,10 +2,7 @@
 <?php 
     require('../model/db.php');
     require('../controller/vip_memberController.php');
-    $KHs = get_KH();
-    $ten_KH_search ="";
-    $sdt_KH_search ="";
-    ?>
+?>
 <head>
   <link rel="stylesheet" href="../css/vipmember.css">
 </head>

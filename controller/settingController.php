@@ -125,5 +125,48 @@
         $statement->execute();
         $statement->closeCursor();
     }
-        
+    
+    $member = get_Member();
+    $MN1 = get_MonAn_MN1();
+    $MN2 = get_MonAn_MN2();
+    $MN3 = get_MonAn_MN3();
+    $MN4 = get_MonAn_MN4();
+    if(!empty($_POST["ma_mon_del"])){
+        $ma_mon_del = $_POST["ma_mon_del"];
+        delete_MonAn($ma_mon_del);
+        header("Location: .?ma_mon_del=$ma_mon_del");
+        header("Location: ./setting.php");
+    }
+    if(!empty($_POST["add_mon"]) && $_POST["Gia"] >0 ){
+        $ten_mon = $_POST["Ten_mon"];
+        $gia = $_POST["Gia"];
+        $ma_menu = $_POST["add_mon"];
+        add_MonAn($ten_mon, $gia, $ma_menu );
+        header("Location: ./setting.php");
+    }
+    if(!empty($_POST["ma_mon_up"])){
+        $ma_mon_up = $_POST["ma_mon_up"];
+        $gia_mon_up = $_POST["gia_mon"];
+        update_gia($ma_mon_up, $gia_mon_up);
+        header("Location: ./setting.php");
+    }
+    if(isset($_POST["Save_Mb"])){
+        $fullname = $_POST["fullname"];
+        $email = $_POST["email"];
+        $birthday = $_POST["birthday"];
+        $sex = $_POST["sex"];
+        update_member($fullname, $email, $birthday, $sex);
+        header("Location: ./setting.php");
+    }
+
+    if(isset($_POST["save_information_ban"]) ){
+        $update_ban = $_POST["update_ban"];
+        for($i=1; $i<=40; $i++){
+            delete_ban($i);
+        }
+        for($i=1; $i<=$update_ban; $i++){
+            update_ban($i);
+        }
+        header("Location: ./setting.php");
+    }
 ?>

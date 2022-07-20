@@ -52,3 +52,8 @@
         if(5000000<=$tong_tien && $tong_tien<10000000)   return 'Bạc';
         if($tong_tien >= 10000000)   return 'Vàng';
     }
+
+    $KHs = get_KH();
+    $ten_KH_search ="";
+    $sdt_KH_search ="";
+?>
