@@ -317,7 +317,7 @@
             <div style="font-weight: bold; padding-left:65%" class="tong_tien">Thành tiền:
             <?php echo $don_gia; ?>
             </div>
-            
+            <input type="hidden" name="tong_tien" value='<?php echo $don_gia; ?>'>
             <?php if ($trang_thai_ban == 0) { ?>
                     <button onclick="saveHFunction()" value='<?php echo $choose_ban; ?>' class="save_del_pay" type="submit" name="add_hoa_don" id="luuhoadon1">Lưu hóa đơn</button>
                     <button class="save_del_pay" type="submit" name="remove_hoa_don" value='<?php echo $ma_HD;?>' id="xoahoadon1" disabled>Xóa hóa đơn </button>
