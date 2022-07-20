@@ -3,10 +3,35 @@
 <?php 
     require('../controller/homeController.php');  
     $KHs = get_KH();
-    $choose_ban = '';
+    $choose_ban = "";
     if(isset($_POST['choose_ban'])){
         $choose_ban = $_POST['choose_ban'];
     }
+    $HD_bans = get_HD_ban($choose_ban); 
+    foreach ($HD_bans as $HD_ban) :
+        $ma_HD = $HD_ban["MA_HOA_DON"];
+        $don_gia = $HD_ban["DON_GIA"];
+    endforeach;
+
+    if(isset($_POST['add_hoa_don'])){
+        $So_ban = $_POST["add_hoa_don"];
+        $Kh = $_POST["khach_Hang"];
+        $mkh = get_KH_bysdt($Kh);
+        $tong_tien =0;
+        for ($x = 0; $x <= sizeof($_POST["so_luongs"]); $x++) {
+            $tong_tien+= $_POST["so_luongs"][$x]*$_POST["gia_mons"][$x];
+
+        }
+        $ma_hoa_don=add_hoadon($mkh,$tong_tien, $So_ban);
+        for ($i = 0; $i < sizeof($_POST["so_luongs"]); $i++) {
+            add_datmon($ma_hoa_don,$_POST["ten_mons"][$i] ,$_POST["so_luongs"][$i]);
+
+        }
+        update_ban_1($So_ban, $ma_hoa_don);
+        header("Location: .?choose_ban=$So_ban");
+        header("Location: ./home.php");
+    }
+
     ?>
 <html>
 
@@ -182,30 +207,31 @@
         <div id="container_2">
     <div>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
-        <button class="nav-link active"  data-bs-toggle="tab" data-bs-target="#nav-home-bill" type="button" role="tab" aria-controls="nav-home-bill" aria-selected="true">Hóa đơn</button>
-        <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-home-booking" type="button" role="tab" aria-controls="nav-home-booking" aria-selected="false">Lịch đặt</button>
+ 
       </div>
     </div>
+
     <div style="padding: 15px; height:630px;overflow:auto" class="tab-content" id="nav-tabContent">
+
       <div class="tab-pane fade show active" id="nav-home-bill" role="tabpanel" aria-labelledby="nav-home-bill-tab"> 
         <form id="homeForm" name="homeForm" action="" method="post" onsubmit=" return validateHomeForm()">
           <input hidden id="ipid" name="ipname" value="69">
           <div class="row">
             <div class="col">
-              <p style="font-weight: bold;margin: 3px">Số bàn : <?php echo $choose_ban ?> </p>
+              <p style="font-weight: bold;margin: 3px" name = "so_ban_chon" value = "">Số bàn : <?php echo $choose_ban ?> </p>
                 <div style ="display: flex">
                 <p style="font-weight: bold;margin: 3px">Khách hàng: </p>
-                <input list="Khach_Hang">
+                <input list="Khach_Hang" name = "khach_Hang" value="">
                 <datalist id="Khach_Hang">
                 <?php foreach ($KHs as $KH) : ?>
                             <?php if($KH['DEL'] == 0) { ?>
-                                <option value="<?= $KH['TEN_KHACH_HANG']; ?> -<?= $KH['SO_DIEN_THOAI']; ?>">
+                                <option value="<?= $KH['TEN_KHACH_HANG']; ?> - <?= $KH['SO_DIEN_THOAI']; ?>">
                             <?php } endforeach; ?>
                 </datalist> 
                 </div>
             </div>
             <div class="col">
-              <p style="font-weight: bold;margin: 3px">Mã hóa đơn : {{hoadon.ma_hoa_don}}</p>
+              <p style="font-weight: bold;margin: 3px" name = "ma_hoa_don" value = "<?php echo $ma_HD; ?>">Mã hóa đơn : <?php echo $ma_HD; ?></p>
             </div>
           </div>
           <table style="margin: 0" class="table">
@@ -222,33 +248,23 @@
           <div style="height: 230px; overflow:auto;" >
             <table class="table">
               <tbody  id="bang_hoa_don">
-              <?php
-                    $menu = "SELECT mon_an.TEN_MON, dat_mon.SO_LUONG, mon_an.GIA FROM dat_mon, mon_an WHERE dat_mon.MA_MON = mon_an.MA_MON" ;
-                    $result = $connect->query($menu);
-                    while ($row = $result->fetch_assoc()) {
-                ?>
-                  <tr >
-                    <!-- <td style="width :30%" class="ten__mon"><?php echo $row["TEN_MON"]; ?></td>
-                    <td style="width :20%" class="so__luong"><?php echo $row["SO_LUONG"]; ?></td>
-                    <td style="width :20%" class="gia__mon"><?php echo $row["GIA"]; ?></td>
-                    <td style="width :20%" class="thanh__tien"> <?php echo $row["GIA"]*$row["SO_LUONG"]; ?></td>
-                    <td style="width :10%"></td> -->
-                  </tr>   
-                  <?php } ?>                   
+                  <?php foreach ($HD_bans as $HD_ban) : ?>
+                    <tr >
+                                <td style="width :30%" class="ten__mon"><?php echo $HD_ban["TEN_MON"]; ?></td>
+                                <td style="width :20%" class="ten__mon"><?php echo $HD_ban["SO_LUONG"]; ?></td>
+                                <td style="width :20%" class="ten__mon"><?php echo $HD_ban["GIA"]; ?></td>
+                                <td style="width :20%" class="ten__mon"><?php echo $HD_ban["GIA"]*$HD_ban["SO_LUONG"]; ?></td>
+                                <td style="width :10%"></td>
+                  </tr>     
+                  <?php  endforeach; ?>            
               </tbody>
             </table>
           </div>
           <div style="height: 190px; margin-top: 15px">
-            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng tiền: 
-              {% if hoadon.tre_em == "yes"%}
-                <input hidden name="tt" value="{{tong_tien_tre_em}}"> 
-                  {{tong_tien_tre_em}}
-              {% else %}
-                {{hoadon.don_gia}}
-                <input hidden name="tt" value="{{hoadon.don_gia}}"> 
-              {% endif %}
+            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng tiền:
+            <?php echo $don_gia; ?>
             </div>
-            <button onclick="saveHFunction()" class="save_del_pay" type="submit" value='{{so_ban}}' name="add_hoa_don" id="luuhoadon1">Lưu hóa đơn</button>
+            <button onclick="saveHFunction()" class="save_del_pay" type="submit" value='<?php echo $choose_ban; ?>' name="add_hoa_don" id="luuhoadon1">Lưu hóa đơn</button>
             <button class="save_del_pay" type="submit" value='{{hoadon.ma_hoa_don}}' name="remove_hoa_don" id="xoahoadon1">Xóa hóa đơn</button> 
             <button class="save_del_pay" type="submit" value='{{hoadon.ma_hoa_don}}' name="pay_hoa_don" id="thanhtoan1">Thanh toán</button>
           </div>
@@ -258,7 +274,6 @@
   </div>
 </div>
 
-    </div>
 </body>
 
 </html>
