@@ -136,7 +136,7 @@
                                                 <td>KHÔNG CÓ KHÁCH HÀNG NÀO</td>
                                             <?php } ?>
                                             <?php } else { ?>
-                                                <p>CHƯA CÓ KHÁCH HÀNG NÀO</p>
+                                                <td>CHƯA CÓ KHÁCH HÀNG NÀO</td>
                                             <?php } ?>
                                         <?php } ?>                                                  
                                 </tbody>
