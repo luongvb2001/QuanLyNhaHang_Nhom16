@@ -116,8 +116,8 @@
                         <div>
                             <button onclick="show_Menu1()">Khai vị</button>
                             <button onclick="show_Menu2()">Món chính</button>
-                            <button onclick="show_Menu3()">Hoa quả</button>
-                            <button onclick="show_Menu4()">Thức uống</button>
+                            <button onclick="show_Menu3()">Đồ uống</button>
+                            <button onclick="show_Menu4()">Hoa quả</button>
                         </div>
                     </div>
                     <div class="tab-content" id="nav-tabMenuContent">
