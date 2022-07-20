@@ -65,17 +65,18 @@
                             $result = $connect->query($sql);
                             while ($row = $result->fetch_assoc()) {
                             ?>
-                                <button id="ban<?php echo $row["SO_BAN"] ?>" style="margin:5px; " type="submit" class="btn_ban" value='<?php echo $row["SO_BAN"] ?>' name="choose_ban">
-                                
+                                <?php
+                                    if($row["DEL"]==0){  ?>
+                                    <button id="ban<?php echo $row["SO_BAN"] ?>" style="margin:5px; " type="submit" class="btn_ban" value='<?php echo $row["SO_BAN"] ?>' name="choose_ban">
                                     <p style="float: left; margin: 0;font-weight: bold"> <?php echo $row["SO_BAN"] ?> </p>
-                                    <?php
-                                    if ($row["TRANG_THAI"] == 0) {
-                                        echo '<img style="width:30%; float: right " src="../images/tick-xanh.png" alt="Table" >';
-                                    } else if ($row["TRANG_THAI"] == 1) {
-                                        echo '<img style="width:30%; float: right " src="../images/tick-yellow.png" alt="Table" >';
-                                    }
-                                    ?>
-                                    <img style="width:84px " src="../images/tablebusy.png" alt="Table" >
+                                        <?php 
+                                            if ($row["TRANG_THAI"] == 0 ) {
+                                                echo '<img style="width:30%; float: right " src="../images/tick-xanh.png" alt="Table" >';
+                                            } else if ($row["TRANG_THAI"] == 1) {
+                                                echo '<img style="width:30%; float: right " src="../images/tick-yellow.png" alt="Table" >';
+                                            } ?>
+                                        <img style="width:84px " src="../images/tablebusy.png" alt="Table">
+                                     <?php } ?>
                                 </button>
                             <?php } ?>
                         </form>

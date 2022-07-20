@@ -35,6 +35,17 @@
         update_member($fullname, $email, $birthday, $sex);
         header("Location: ./setting.php");
     }
+
+    if(isset($_POST["save_information_ban"]) ){
+        $update_ban = $_POST["update_ban"];
+        for($i=1; $i<=25; $i++){
+            delete_ban($i);
+        }
+        for($i=1; $i<=$update_ban; $i++){
+            update_ban($i);
+        }
+        header("Location: ./setting.php");
+    }
 ?>
 
 <head>
@@ -61,6 +72,13 @@
         </div>
 
         <div class="table">
+                <form action="" method="post">
+                    <div class="classnamw">
+                        <input type="number" name="update_ban" min="0" />
+                        <button name="save_information_ban" >Save</button>
+                    </div>
+                </form>
+            <?php  echo "" ?>
             <table id="table_edit_monan">
                 <thead>
                     <tr>
