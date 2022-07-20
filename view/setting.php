@@ -140,9 +140,7 @@
                         </tr>
                         </form>
                     <?php } endforeach; ?>           
-                    <?php } else { ?>
-                        <p>CHƯA CÓ KHÁCH HÀNG NÀO</p>
-                    <?php } ?>
+                    <?php }  ?>
                 </tbody>
             </table>
         
@@ -181,9 +179,7 @@
                         </tr>
                         </form>
                     <?php } endforeach; ?>           
-                    <?php } else { ?>
-                        <p>CHƯA CÓ KHÁCH HÀNG NÀO</p>
-                    <?php } ?>
+                    <?php }  ?>
                 </tbody>
             </table>
 
@@ -221,8 +217,6 @@
                         </tr>
                         </form>
                     <?php } endforeach; ?>           
-                    <?php } else { ?>
-                        <p>CHƯA CÓ KHÁCH HÀNG NÀO</p>
                     <?php } ?>
                 </tbody>
             </table>
@@ -261,9 +255,7 @@
                         </tr>
                         </form>
                     <?php } endforeach; ?>           
-                    <?php } else { ?>
-                        <p>CHƯA CÓ KHÁCH HÀNG NÀO</p>
-                    <?php } ?>
+                    <?php }  ?>
                 </tbody>
             </table>
 
