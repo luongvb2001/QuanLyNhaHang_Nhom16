@@ -4,9 +4,11 @@
     require('../controller/homeController.php');  
     $KHs = get_KH();
     $choose_ban = "";
+    $trang_thai_ban = "";
     if(isset($_POST['choose_ban'])){
         $choose_ban = $_POST['choose_ban'];
     }
+    
     $HD_bans = get_HD_ban($choose_ban); 
     foreach ($HD_bans as $HD_ban) :
         $ma_HD = $HD_ban["MA_HOA_DON"];
@@ -56,6 +58,10 @@
         $mkh = get_KH_bysdt($Kh);
         save_hd($ma_hd_save, $tong, $mkh['MA_KHACH_HANG']);
     }
+
+    $ban = get_ban($choose_ban);
+    $trang_thai_ban = $ban["TRANG_THAI"];
+
     ?>
 <html>
 
@@ -84,16 +90,18 @@
                             $result = $connect->query($sql);
                             while ($row = $result->fetch_assoc()) {
                             ?>
-                                <button id="ban<?php echo $row["SO_BAN"] ?>" style="margin:5px; " type="submit" class="btn_ban" value='<?php echo $row["SO_BAN"] ?>' name="choose_ban">
+                                <?php
+                                    if($row["DEL"]==0){  ?>
+                                    <button id="ban<?php echo $row["SO_BAN"] ?>" style="margin:5px; " type="submit" class="btn_ban" value='<?php echo $row["SO_BAN"] ?>' name="choose_ban">
                                     <p style="float: left; margin: 0;font-weight: bold"> <?php echo $row["SO_BAN"] ?> </p>
-                                    <?php
-                                    if ($row["TRANG_THAI"] == 0) {
-                                        echo '<img style="width:30%; float: right " src="../images/tick-xanh.png" alt="Table" >';
-                                    } else if ($row["TRANG_THAI"] == 1) {
-                                        echo '<img style="width:30%; float: right " src="../images/tick-yellow.png" alt="Table" >';
-                                    }
-                                    ?>
-                                    <img style="width:84px " src="../images/tablebusy.png" alt="Table">
+                                        <?php 
+                                            if ($row["TRANG_THAI"] == 0 ) {
+                                                echo '<img style="width:30%; float: right " src="../images/tick-xanh.png" alt="Table" >';
+                                            } else if ($row["TRANG_THAI"] == 1) {
+                                                echo '<img style="width:30%; float: right " src="../images/tick-yellow.png" alt="Table" >';
+                                            } ?>
+                                        <img style="width:84px " src="../images/tablebusy.png" alt="Table">
+                                     <?php } ?>
                                 </button>
                             <?php } ?>
                         </form>
@@ -115,10 +123,10 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col" style="width :10%">Mã</th>
-                                        <th scope="col" style="width :40%">Tên</th>
-                                        <th scope="col" style="width :20%">Giá</th>
-                                        <th scope="col" style="width :10%">Chọn</th>
+                                        <th style="width :10%">Mã</th>
+                                        <th style="width :40%">Tên</th>
+                                        <th style="width :20%">Giá</th>
+                                        <th style="width :30%">Chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -130,9 +138,13 @@
                                         <tr>
                                             <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
                                             <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                            <td style="width :40%"><?php echo $row["GIA"]; ?></td>
-                                            <td style="width :10%">
+                                            <td style="width :20%"><?php echo $row["GIA"]; ?></td>
+                                            <td style="width :30%">
+                                            <?php if ($trang_thai_ban == 0){ ?>
                                                 <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
+                                            <?php } else if ($trang_thai_ban == 1){ ?>
+                                                <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon" disabled>Add</button>
+                                            <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -146,7 +158,7 @@
                                         <th scope="col" style="width :10%">Mã</th>
                                         <th scope="col" style="width :40%">Tên</th>
                                         <th scope="col" style="width :20%">Giá</th>
-                                        <th scope="col" style="width :10%">Chọn</th>
+                                        <th scope="col" style="width :30%">Chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -158,9 +170,13 @@
                                         <tr>
                                             <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
                                             <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                            <td style="width :40%"><?php echo $row["GIA"]; ?></td>
-                                            <td style="width :10%">
-                                            <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
+                                            <td style="width :20%"><?php echo $row["GIA"]; ?></td>
+                                            <td style="width :30%">
+                                            <?php if ($trang_thai_ban == 0){ ?>
+                                                <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
+                                            <?php } else if ($trang_thai_ban == 1){ ?>
+                                                <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon" disabled>Add</button>
+                                            <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -174,7 +190,7 @@
                                         <th scope="col" style="width :10%">Mã</th>
                                         <th scope="col" style="width :40%">Tên</th>
                                         <th scope="col" style="width :20%">Giá</th>
-                                        <th scope="col" style="width :10%">Chọn</th>
+                                        <th scope="col" style="width :30%">Chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -186,9 +202,13 @@
                                         <tr>
                                             <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
                                             <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                            <td style="width :40%"><?php echo $row["GIA"]; ?></td>
-                                            <td style="width :10%">
-                                            <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
+                                            <td style="width :20%"><?php echo $row["GIA"]; ?></td>
+                                            <td style="width :30%">
+                                            <?php if ($trang_thai_ban == 0){ ?>
+                                                <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
+                                            <?php } else if ($trang_thai_ban == 1){ ?>
+                                                <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon" disabled>Add</button>
+                                            <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -202,7 +222,7 @@
                                         <th scope="col" style="width :10%">Mã</th>
                                         <th scope="col" style="width :40%">Tên</th>
                                         <th scope="col" style="width :20%">Giá</th>
-                                        <th scope="col" style="width :10%">Chọn</th>
+                                        <th scope="col" style="width :30%">Chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -214,9 +234,13 @@
                                         <tr>
                                             <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
                                             <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                            <td style="width :40%"><?php echo $row["GIA"]; ?></td>
-                                            <td style="width :10%">
-                                            <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
+                                            <td style="width :20%"><?php echo $row["GIA"]; ?></td>
+                                            <td style="width :30%">
+                                            <?php if ($trang_thai_ban == 0){ ?>
+                                                <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
+                                            <?php } else if ($trang_thai_ban == 1){ ?>
+                                                <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon" disabled>Add</button>
+                                            <?php } ?>
                                             </td>
                                         </tr>
                                     <?php } ?>
@@ -293,10 +317,17 @@
             <div style="font-weight: bold; padding-left:65%" class="tong_tien">Thành tiền:
             <?php echo $don_gia; ?>
             </div>
-            <button onclick="saveHFunction()" class="save_del_pay" type="submit" value='<?php echo $choose_ban; ?>' name="add_hoa_don" id="luuhoadon1">Lưu hóa đơn</button>
-            <input type="hidden" name="tong_tien" value='<?php echo $don_gia; ?>'>
-            <button class="save_del_pay" type="submit" value='<?php echo $ma_HD;?>' name="remove_hoa_don" id="xoahoadon1">Xóa hóa đơn</button> 
-            <button class="save_del_pay" type="submit" value='<?php echo $ma_HD;?>' name="pay_hoa_don" id="thanhtoan1">Thanh toán</button>
+            
+            <?php if ($trang_thai_ban == 0) { ?>
+                    <button onclick="saveHFunction()" value='<?php echo $choose_ban; ?>' class="save_del_pay" type="submit" name="add_hoa_don" id="luuhoadon1">Lưu hóa đơn</button>
+                    <button class="save_del_pay" type="submit" name="remove_hoa_don" value='<?php echo $ma_HD;?>' id="xoahoadon1" disabled>Xóa hóa đơn </button>
+                    <button class="save_del_pay" type="submit" name="pay_hoa_don" value='<?php echo $ma_HD;?>' id="thanhtoan1" disabled>Thanh toán</button>
+            <?php   } else if ($trang_thai_ban == 1) { ?>
+                    <button onclick="saveHFunction()" class="save_del_pay" type="submit" value='<?php echo $choose_ban; ?>' name="add_hoa_don" id="luuhoadon1" disabled>Lưu hóa đơn</button>
+                    <button class="save_del_pay" type="submit" value='<?php echo $ma_HD;?>' name="remove_hoa_don" id="xoahoadon1" >Xóa hóa đơn</button>
+                    <button class="save_del_pay" type="submit" value='<?php echo $ma_HD;?>' name="pay_hoa_don" id="thanhtoan1">Thanh toán</button>
+            <?php    }    ?>
+            
           </div>
         </form>
       </div>
