@@ -64,21 +64,21 @@
                 <span>Update_Member</span>
                 <ion-icon name="arrow-dropright"></ion-icon>
             </button>
+            
             <button class="slibar_button" onclick='location.href="../view/Security/register.php"'>
                 <span>Register</span>
                 <ion-icon name="arrow-dropright"></ion-icon>
             </button>
+            <form action="" method="post">
+                <div class="update_so_ban">
+                    <input type="number" name="update_ban" min="0" placeholder="Nhập Số Lượng Bàn" class="update_soban_input"/>
+                    <button name="save_information_ban" class="update_soban_button">Save</button>
+                </div>
+            </form>
             <img src="../images/setting.png" alt="anh_loi" style="width: 60%; height: 200px"/>
         </div>
 
         <div class="table">
-                <form action="" method="post">
-                    <div class="classnamw">
-                        <input type="number" name="update_ban" min="0" />
-                        <button name="save_information_ban" >Save</button>
-                    </div>
-                </form>
-            <?php  echo "" ?>
             <table id="table_edit_monan">
                 <thead>
                     <tr>
