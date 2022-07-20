@@ -47,7 +47,8 @@
     }
         
     function get_Rank($tong_tien){
-        if($tong_tien < 1000000)    return 'Đồng';
-        if(1000000<=$tong_tien && $tong_tien<5000000) return 'Bạc';
-        if($tong_tien >= 5000000)   return 'Vàng';
+        if($tong_tien < 1000000)    return 'Vô hạng';
+        if(1000000<=$tong_tien && $tong_tien<5000000) return 'Đồng';
+        if(5000000<=$tong_tien && $tong_tien<10000000)   return 'Bạc';
+        if($tong_tien >= 10000000)   return 'Vàng';
     }
