@@ -80,11 +80,12 @@ if(isset($_POST["action"]))
 	{
         $query4 = "
             SELECT ma.TEN_MON as tenmon, SUM(SO_LUONG) AS Total
-            FROM dat_mon dm, mon_an ma, hoa_don ha
+            FROM dat_mon dm, mon_an ma, hoa_don ha 
 			WHERE dm.MA_MON = ma.MA_MON
 				AND ha.MA_HOA_DON = dm.MA_HOA_DON
 				AND month(NGAY_LAP) = month(CURDATE())
-			GROUP By dm.MA_MON;
+			GROUP By dm.MA_MON LIMIT 6 ;
+
 		";
         $result4 = $connect->query($query4);
         $data4 = array();
@@ -108,7 +109,7 @@ if(isset($_POST["action"]))
 			WHERE dm.MA_MON = ma.MA_MON
 				AND ha.MA_HOA_DON = dm.MA_HOA_DON
 				AND year(NGAY_LAP) = year(CURDATE())
-			GROUP By dm.MA_MON;
+			GROUP By dm.MA_MON LIMIT 6;
 		";
         $result5 = $connect->query($query5);
         $data5 = array();
@@ -131,7 +132,7 @@ if(isset($_POST["action"]))
             FROM dat_mon dm, mon_an ma, hoa_don ha
 			WHERE dm.MA_MON = ma.MA_MON
 				AND ha.MA_HOA_DON = dm.MA_HOA_DON
-			GROUP By dm.MA_MON;         
+			GROUP By dm.MA_MON LIMIT 6;         
 		";
         $result6 = $connect->query($query6);
         $data6 = array();
@@ -155,7 +156,7 @@ if(isset($_POST["action"]))
 			WHERE dm.MA_MON = ma.MA_MON
 				AND ha.MA_HOA_DON = dm.MA_HOA_DON
 				AND month(NGAY_LAP) = month(CURDATE())
-			GROUP By dm.MA_MON;        
+			GROUP By dm.MA_MON LIMIT 6;        
 		";
         $result7 = $connect->query($query7);
         $data7 = array();
@@ -179,7 +180,7 @@ if(isset($_POST["action"]))
 			WHERE dm.MA_MON = ma.MA_MON
 				AND ha.MA_HOA_DON = dm.MA_HOA_DON
 				AND year(NGAY_LAP) = year(CURDATE())
-			GROUP By dm.MA_MON;   
+			GROUP By dm.MA_MON LIMIT 6;   
 		";
         $result8 = $connect->query($query8);
         $data8 = array();
@@ -202,7 +203,7 @@ if(isset($_POST["action"]))
             FROM dat_mon dm, mon_an ma, hoa_don ha
 			WHERE dm.MA_MON = ma.MA_MON
 				AND ha.MA_HOA_DON = dm.MA_HOA_DON
-			GROUP By dm.MA_MON; 
+			GROUP By dm.MA_MON LIMIT 6; 
 		";
         $result9 = $connect->query($query9);
         $data8 = array();
