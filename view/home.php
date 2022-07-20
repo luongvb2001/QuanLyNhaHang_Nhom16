@@ -14,17 +14,31 @@
         $ma_HD = $HD_ban["MA_HOA_DON"];
         $don_gia = $HD_ban["DON_GIA"];
     endforeach;
-
+    $kh_ban = get_KH_bymb($choose_ban);
+    if($kh_ban) $rank = get_Rank($kh_ban["TONG_TIEN"]);
+    $giam = 0;
+    if(!strcmp($rank, "Đồng")) $giam = 0.05;
+    if(!strcmp($rank, "Bạc")) $giam = 0.1;
+    if(!strcmp($rank, "Vàng")) $giam = 0.15;
     if(isset($_POST['add_hoa_don'])){
         $So_ban = $_POST["add_hoa_don"];
         $Kh = $_POST["khach_Hang"];
         $mkh = get_KH_bysdt($Kh);
+        
+        if(empty($_POST["khach_Hang"])) $giam1 = 0;
+        else{ 
+            $rank1 = get_Rank($mkh["TONG_TIEN"]);
+        if(!strcmp($rank1, "Đồng")) $giam1 = 0.05;
+        if(!strcmp($rank1, "Bạc")) $giam1 = 0.1;
+        if(!strcmp($rank1, "Vàng")) $giam1 = 0.15;
+        }
         $tong_tien =0;
         for ($x = 0; $x <= sizeof($_POST["so_luongs"]); $x++) {
             $tong_tien+= $_POST["so_luongs"][$x]*$_POST["gia_mons"][$x];
 
         }
-        $ma_hoa_don=add_hoadon($mkh,$tong_tien, $So_ban);
+        $tong_tien = $tong_tien*(1-$giam1);
+        $ma_hoa_don=add_hoadon($mkh["MA_KHACH_HANG"],$tong_tien, $So_ban);
         for ($i = 0; $i < sizeof($_POST["so_luongs"]); $i++) {
             add_datmon($ma_hoa_don,$_POST["ten_mons"][$i] ,$_POST["so_luongs"][$i]);
 
@@ -32,6 +46,17 @@
         update_ban_1($So_ban, $ma_hoa_don);
         header("Location: .?choose_ban=$So_ban");
         header("Location: ./home.php");
+    }
+    if(isset($_POST['remove_hoa_don'])){
+        $ma_hd_del = $_POST["remove_hoa_don"];
+        xoa_hd($ma_hd_del);
+    }
+    if(isset($_POST['pay_hoa_don'])){
+        $ma_hd_save = $_POST["pay_hoa_don"];
+        $tong = $_POST["tong_tien"];
+        $Kh = $_POST["khach_Hang"];
+        $mkh = get_KH_bysdt($Kh);
+        save_hd($ma_hd_save, $tong, $mkh['MA_KHACH_HANG']);
     }
 
     $ban = get_ban($choose_ban);
@@ -238,19 +263,20 @@
 
       <div class="tab-pane fade show active" id="nav-home-bill" role="tabpanel" aria-labelledby="nav-home-bill-tab"> 
         <form id="homeForm" name="homeForm" action="" method="post" onsubmit=" return validateHomeForm()">
-          <input hidden id="ipid" name="ipname" value="69">
+          <input hidden name="ipname" value="69">
           <div class="row">
             <div class="col">
-              <p style="font-weight: bold;margin: 3px" name = "so_ban_chon" value = "">Số bàn : <?php echo $choose_ban?> </p>
+              <p style="font-weight: bold;margin: 3px" name = "so_ban_chon" value = "">Số bàn : <?php echo $choose_ban; ?> </p>
                 <div style ="display: flex">
                 <p style="font-weight: bold;margin: 3px">Khách hàng: </p>
-                <input list="Khach_Hang" name = "khach_Hang" value="">
+                <input list="Khach_Hang" name = "khach_Hang" value="<?= $kh_ban['TEN_KHACH_HANG']; ?> <?php if($kh_ban['SO_DIEN_THOAI']) echo'-'; ?> <?= $kh_ban['SO_DIEN_THOAI']; ?>">
                 <datalist id="Khach_Hang">
                 <?php foreach ($KHs as $KH) : ?>
                             <?php if($KH['DEL'] == 0) { ?>
                                 <option value="<?= $KH['TEN_KHACH_HANG']; ?> - <?= $KH['SO_DIEN_THOAI']; ?>">
                             <?php } endforeach; ?>
                 </datalist> 
+                <p style="font-weight: bold;margin: 3px"> Rank: <?php echo $rank; ?> </p>
                 </div>
             </div>
             <div class="col">
@@ -283,22 +309,24 @@
               </tbody>
             </table>
           </div>
+          
           <div style="height: 190px; margin-top: 15px">
-            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng tiền:
+            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng:
+            <?php echo $don_gia/(1-$giam); ?>
+            </div>
+            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Thành tiền:
             <?php echo $don_gia; ?>
             </div>
             
-            <?php
-                if ($trang_thai_ban == 0) {
-                    echo '<button onclick="saveHFunction()" class="save_del_pay" type="submit" name="add_hoa_don" id="luuhoadon1">Lưu hóa đơn</button>
-                    <button class="save_del_pay" type="submit" name="remove_hoa_don" id="xoahoadon1" disabled>Xóa hóa đơn </button>
-                    <button class="save_del_pay" type="submit" name="pay_hoa_don" id="thanhtoan1" disabled>Thanh toán</button>';
-                } else if ($trang_thai_ban == 1) {
-                    echo '<button onclick="saveHFunction()" class="save_del_pay" type="submit" name="add_hoa_don" id="luuhoadon1" disabled>Lưu hóa đơn</button>
-                    <button class="save_del_pay" type="submit" name="remove_hoa_don" id="xoahoadon1" >Xóa hóa đơn</button>
-                    <button class="save_del_pay" type="submit" name="pay_hoa_don" id="thanhtoan1">Thanh toán</button>';
-                }
-            ?>
+            <?php if ($trang_thai_ban == 0) { ?>
+                    <button onclick="saveHFunction()" value='<?php echo $choose_ban; ?>' class="save_del_pay" type="submit" name="add_hoa_don" id="luuhoadon1">Lưu hóa đơn</button>
+                    <button class="save_del_pay" type="submit" name="remove_hoa_don" value='<?php echo $ma_HD;?>' id="xoahoadon1" disabled>Xóa hóa đơn </button>
+                    <button class="save_del_pay" type="submit" name="pay_hoa_don" value='<?php echo $ma_HD;?>' id="thanhtoan1" disabled>Thanh toán</button>
+            <?php   } else if ($trang_thai_ban == 1) { ?>
+                    <button onclick="saveHFunction()" class="save_del_pay" type="submit" value='<?php echo $choose_ban; ?>' name="add_hoa_don" id="luuhoadon1" disabled>Lưu hóa đơn</button>
+                    <button class="save_del_pay" type="submit" value='<?php echo $ma_HD;?>' name="remove_hoa_don" id="xoahoadon1" >Xóa hóa đơn</button>
+                    <button class="save_del_pay" type="submit" value='<?php echo $ma_HD;?>' name="pay_hoa_don" id="thanhtoan1">Thanh toán</button>
+            <?php    }    ?>
             
           </div>
         </form>

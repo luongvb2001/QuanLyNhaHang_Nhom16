@@ -71,9 +71,27 @@
         $statement->execute();
         $courses = $statement->fetch();
         $statement->closeCursor();
-        return $courses["MA_KHACH_HANG"];
+        return $courses;
     }
-
+    function get_KH_bymb($so_ban) {
+        global $db;
+        $query = 'SELECT TEN_KHACH_HANG, SO_DIEN_THOAI, TONG_TIEN FROM khach_hang, hoa_don, ban
+        Where ban.SO_BAN = :so_ban
+        and ban.MA_HOA_DON = hoa_don.MA_HOA_DON
+        and hoa_don.MA_KHACH_HANG = khach_hang.MA_KHACH_HANG';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':so_ban', $so_ban);
+        $statement->execute();
+        $courses = $statement->fetch();
+        $statement->closeCursor();
+        return $courses;
+    }
+    function get_Rank($tong_tien){
+        if($tong_tien < 1000000)    return 'Vô hạng';
+        if(1000000<=$tong_tien && $tong_tien<5000000) return 'Đồng';
+        if(5000000<=$tong_tien && $tong_tien<10000000)   return 'Bạc';
+        if($tong_tien >= 10000000)   return 'Vàng';
+    }
     function get_HD_ban($ma_ban) {
         global $db;
         $query = 'SELECT mon_an.TEN_MON, dat_mon.SO_LUONG, mon_an.GIA, ban.MA_HOA_DON, hoa_don.DON_GIA
@@ -89,6 +107,44 @@
         $courses = $statement->fetchAll();
         $statement->closeCursor();
         return $courses;
+    }
+    function xoa_hd($ma_hd){
+        global $db;
+        $query = 'DELETE FROM dat_mon WHERE MA_HOA_DON= :ma_hd;';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':ma_hd', $ma_hd);
+        $statement->execute();
+        $statement->closeCursor();
+        $query = 'UPDATE ban
+        SET MA_HOA_DON = 0, TRANG_THAI = 0
+        WHERE MA_HOA_DON = :ma_hd';
+        $statement2 = $db->prepare($query);
+        $statement2->bindValue(':ma_hd', $ma_hd);
+        $statement2->execute();
+        $statement2->closeCursor();
+        $query = 'DELETE FROM hoa_don WHERE MA_HOA_DON= :ma_hd;';
+        $statement3 = $db->prepare($query);
+        $statement3->bindValue(':ma_hd', $ma_hd);
+        $statement3->execute();
+        $statement3->closeCursor();
+    }
+    function save_hd($ma_hd, $tong_tien, $ma_KH){
+        global $db;
+        $query = 'UPDATE ban
+        SET MA_HOA_DON = 0, TRANG_THAI = 0
+        WHERE MA_HOA_DON = :ma_hd';
+        $statement2 = $db->prepare($query);
+        $statement2->bindValue(':ma_hd', $ma_hd);
+        $statement2->execute();
+        $statement2->closeCursor();
+        $query2 = 'UPDATE khach_hang
+        SET TONG_TIEN = TONG_TIEN + :tong_tien
+        WHERE MA_KHACH_HANG = :ma_KH';
+        $statement3 = $db->prepare($query2);
+        $statement3->bindValue(':tong_tien', $tong_tien);
+        $statement3->bindValue(':ma_KH', $ma_KH);
+        $statement3->execute();
+        $statement3->closeCursor();
     }
 
     function get_ban($ma_ban){
