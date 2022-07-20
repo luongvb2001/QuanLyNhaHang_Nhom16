@@ -38,7 +38,7 @@
 
     if(isset($_POST["save_information_ban"]) ){
         $update_ban = $_POST["update_ban"];
-        for($i=1; $i<=25; $i++){
+        for($i=1; $i<=40; $i++){
             delete_ban($i);
         }
         for($i=1; $i<=$update_ban; $i++){

@@ -64,7 +64,7 @@
     $ban = get_ban($choose_ban);
     $trang_thai_ban = $ban["TRANG_THAI"];
 
-    ?>
+?>
 <html>
 
 <head>
@@ -111,7 +111,7 @@
                 </div>
 
                 <!-- danh sách thực đơn -->
-                <div style="overflow:auto; height: 580px; display: none" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <div style="overflow:auto; height: 580px; display: none" id="nav-profile">
                     <div>
                         <div>
                             <button onclick="show_Menu1()">Khai vị</button>
@@ -125,23 +125,23 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th style="width :10%">Mã</th>
-                                        <th style="width :40%">Tên</th>
-                                        <th style="width :20%">Giá</th>
-                                        <th style="width :30%">Chọn</th>
+                                        <th scope="col" style="width :10%">Mã</th>
+                                        <th scope="col" style="width :45%">Tên</th>
+                                        <th scope="col" style="width :25%">Giá</th>
+                                        <th scope="col" style="width :20%">Chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $menu = "SELECT * FROM mon_an WHERE mon_an.MA_MENU = 1";
+                                        $menu = "SELECT * FROM mon_an WHERE mon_an.MA_MENU = 1 and mon_an.DEL = 0";
                                         $result = $connect->query($menu);
                                         while ($row = $result->fetch_assoc()) {
                                     ?>
                                         <tr>
                                             <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
-                                            <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                            <td style="width :20%"><?php echo $row["GIA"]; ?></td>
-                                            <td style="width :30%">
+                                            <td style="width :45%"><?php echo $row["TEN_MON"]; ?></td>
+                                            <td style="width :25%"><?php echo $row["GIA"]; ?></td>
+                                            <td style="width :20%">
                                             <?php if ($trang_thai_ban == 0){ ?>
                                                 <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
                                             <?php } else if ($trang_thai_ban == 1){ ?>
@@ -158,22 +158,22 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width :10%">Mã</th>
-                                        <th scope="col" style="width :40%">Tên</th>
-                                        <th scope="col" style="width :20%">Giá</th>
-                                        <th scope="col" style="width :30%">Chọn</th>
+                                        <th scope="col" style="width :45%">Tên</th>
+                                        <th scope="col" style="width :25%">Giá</th>
+                                        <th scope="col" style="width :20%">Chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $menu = "SELECT * FROM mon_an WHERE mon_an.MA_MENU = 2";
+                                        $menu = "SELECT * FROM mon_an WHERE mon_an.MA_MENU = 2 and mon_an.DEL = 0";
                                         $result = $connect->query($menu);
                                         while ($row = $result->fetch_assoc()) {
                                     ?>
                                         <tr>
                                             <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
-                                            <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                            <td style="width :20%"><?php echo $row["GIA"]; ?></td>
-                                            <td style="width :30%">
+                                            <td style="width :45%"><?php echo $row["TEN_MON"]; ?></td>
+                                            <td style="width :25%"><?php echo $row["GIA"]; ?></td>
+                                            <td style="width :20%">
                                             <?php if ($trang_thai_ban == 0){ ?>
                                                 <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
                                             <?php } else if ($trang_thai_ban == 1){ ?>
@@ -190,22 +190,22 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width :10%">Mã</th>
-                                        <th scope="col" style="width :40%">Tên</th>
-                                        <th scope="col" style="width :20%">Giá</th>
-                                        <th scope="col" style="width :30%">Chọn</th>
+                                        <th scope="col" style="width :45%">Tên</th>
+                                        <th scope="col" style="width :25%">Giá</th>
+                                        <th scope="col" style="width :20%">Chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $menu = "SELECT * FROM mon_an WHERE mon_an.MA_MENU = 3";
+                                        $menu = "SELECT * FROM mon_an WHERE mon_an.MA_MENU = 3 and mon_an.DEL = 0";
                                         $result = $connect->query($menu);
                                         while ($row = $result->fetch_assoc()) {
                                     ?>
                                         <tr>
                                             <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
-                                            <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                            <td style="width :20%"><?php echo $row["GIA"]; ?></td>
-                                            <td style="width :30%">
+                                            <td style="width :45%"><?php echo $row["TEN_MON"]; ?></td>
+                                            <td style="width :25%"><?php echo $row["GIA"]; ?></td>
+                                            <td style="width :20%">
                                             <?php if ($trang_thai_ban == 0){ ?>
                                                 <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
                                             <?php } else if ($trang_thai_ban == 1){ ?>
@@ -222,22 +222,22 @@
                                 <thead>
                                     <tr>
                                         <th scope="col" style="width :10%">Mã</th>
-                                        <th scope="col" style="width :40%">Tên</th>
-                                        <th scope="col" style="width :20%">Giá</th>
-                                        <th scope="col" style="width :30%">Chọn</th>
+                                        <th scope="col" style="width :45%">Tên</th>
+                                        <th scope="col" style="width :25%">Giá</th>
+                                        <th scope="col" style="width :20%">Chọn</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php
-                                        $menu = "SELECT * FROM mon_an WHERE mon_an.MA_MENU = 4";
+                                        $menu = "SELECT * FROM mon_an WHERE mon_an.MA_MENU = 4 and mon_an.DEL = 0";
                                         $result = $connect->query($menu);
                                         while ($row = $result->fetch_assoc()) {
                                     ?>
                                         <tr>
                                             <td style="width :10%"><?php echo $row["MA_MON"]; ?></td>
-                                            <td style="width :40%"><?php echo $row["TEN_MON"]; ?></td>
-                                            <td style="width :20%"><?php echo $row["GIA"]; ?></td>
-                                            <td style="width :30%">
+                                            <td style="width :45%"><?php echo $row["TEN_MON"]; ?></td>
+                                            <td style="width :25%"><?php echo $row["GIA"]; ?></td>
+                                            <td style="width :20%">
                                             <?php if ($trang_thai_ban == 0){ ?>
                                                 <button id="addMeal<?php echo $row["TEN_MON"] ?>" onclick="addMealFunction('<?php echo $row["MA_MON"] ?>', '<?php echo $row["TEN_MON"] ?>', '<?php echo $row["GIA"] ?>')" class="add_mon">Add</button>
                                             <?php } else if ($trang_thai_ban == 1){ ?>
@@ -255,23 +255,16 @@
         </div>
 
         <div id="container_2">
-    <div>
-      <div class="nav nav-tabs" id="nav-tab" role="tablist">
- 
-      </div>
-    </div>
+    <div style="padding: 15px; height:575px;overflow:auto" class="tab-content" id="nav-tabContent">
 
-    <div style="padding: 15px; height:630px;overflow:auto" class="tab-content" id="nav-tabContent">
-
-      <div class="tab-pane fade show active" id="nav-home-bill" role="tabpanel" aria-labelledby="nav-home-bill-tab"> 
-        <form id="homeForm" name="homeForm" action="" method="post" onsubmit=" return validateHomeForm()">
-          <input hidden name="ipname" value="69">
+      <div class="tab-pane fade" id="nav-home-bill" > 
+        <form id="homeForm" name="homeForm" action="" method="post">
           <div class="row">
             <div class="col">
               <p style="font-weight: bold;margin: 3px" name = "so_ban_chon" value = "">Số bàn : <?php echo $choose_ban; ?> </p>
                 <div style ="display: flex">
                 <p style="font-weight: bold;margin: 3px">Khách hàng: </p>
-                <input list="Khach_Hang" name = "khach_Hang" value="<?= $kh_ban['TEN_KHACH_HANG']; ?> <?php if($kh_ban['SO_DIEN_THOAI']) echo'-'; ?> <?= $kh_ban['SO_DIEN_THOAI']; ?>">
+                    <input list="Khach_Hang" name = "khach_Hang" value="<?= $kh_ban['TEN_KHACH_HANG']; ?> <?php if($kh_ban['SO_DIEN_THOAI']) echo'-'; ?> <?= $kh_ban['SO_DIEN_THOAI']; ?>">
                 <datalist id="Khach_Hang">
                 <?php foreach ($KHs as $KH) : ?>
                             <?php if($KH['DEL'] == 0) { ?>
@@ -296,7 +289,7 @@
               </tr>
             </thead>
           </table>    
-          <div style="height: 230px; overflow:auto;" >
+          <div style="height: 360px; overflow:auto;" >
             <table class="table">
               <tbody  id="bang_hoa_don">
                   <?php foreach ($HD_bans as $HD_ban) : ?>
@@ -312,7 +305,7 @@
             </table>
           </div>
           
-          <div style="height: 190px; margin-top: 15px">
+          <div style="margin-top: 15px">
             <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng:
             <?php echo $don_gia/(1-$giam); ?>
             </div>

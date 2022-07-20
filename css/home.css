@@ -7,13 +7,14 @@
 } */
 
 .container-home{
-  margin: auto;
+  margin-left: 9%;
   margin-top: 100px;
   width: 80%;
   height: 600px;
   padding: 1rem;
   background-color: #328fa8;
   border-radius: 10px;
+  position: fixed;
 }
   #container_1{
     width: 49%;
@@ -77,4 +78,13 @@ table{
 th, td{
     text-align:left;
     padding:10px;
+}
+
+.save_del_pay {
+  border: 1px #328fa8;
+  border-radius: 10px;
+  padding: 5px;
+  text-align: center;
+  background-color: #328fa8;
+  color: white;
 }

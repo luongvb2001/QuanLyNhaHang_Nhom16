@@ -5,11 +5,11 @@ function show_DsBan(){
 
 function show_Menu(){
     document.getElementById('nav-home').style.display="none";
-    document.getElementById('nav-profile').style.display="table";
+    document.getElementById('nav-profile').style.display="block";
 }
 
 function show_Menu1(){
-    document.getElementById('menu1').style.display = "table";
+    document.getElementById('menu1').style.display = "block";
     document.getElementById('menu2').style.display = "none";
     document.getElementById('menu3').style.display = "none";
     document.getElementById('menu4').style.display = "none";
@@ -17,7 +17,7 @@ function show_Menu1(){
 
 function show_Menu2(){
     document.getElementById('menu1').style.display = "none";
-    document.getElementById('menu2').style.display = "table";
+    document.getElementById('menu2').style.display = "block";
     document.getElementById('menu3').style.display = "none";
     document.getElementById('menu4').style.display = "none";
 }
@@ -25,7 +25,7 @@ function show_Menu2(){
 function show_Menu3(){
     document.getElementById('menu1').style.display = "none";
     document.getElementById('menu2').style.display = "none";
-    document.getElementById('menu3').style.display = "table";
+    document.getElementById('menu3').style.display = "block";
     document.getElementById('menu4').style.display = "none";
 }
 
@@ -33,7 +33,7 @@ function show_Menu4(){
     document.getElementById('menu1').style.display = "none";
     document.getElementById('menu2').style.display = "none";
     document.getElementById('menu3').style.display = "none";
-    document.getElementById('menu4').style.display = "table";
+    document.getElementById('menu4').style.display = "block";
 }
 
 
@@ -54,22 +54,4 @@ function deleteMealFunction(idMeal, tenmon) {
     element.parentNode.removeChild(element);
     document.getElementById("addMeal"+tenmon).disabled= false;
     document.getElementById("addMeal"+tenmon+"db").disabled= false;
-}
-function useHFunction(){
-    document.homeForm.ipname.value= 96;
-}
-function saveHFunction(){
-    document.homeForm.ipname.value= 66;
-}
-function searchHFunction(){
-    document.homeForm.ipname.value= 99;
-}
-function useTFunction(){
-    document.take_awayForm.ipname.value= 96;
-}
-function saveTFunction(){
-    document.take_awayForm.ipname.value= 66;
-}
-function searchTFunction(){
-    document.take_awayForm.ipname.value= 99;
 }
