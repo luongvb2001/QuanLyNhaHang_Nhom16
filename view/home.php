@@ -33,6 +33,7 @@
         if(!strcmp($rank1, "Vàng")) $giam1 = 0.15;
         }
         $tong_tien =0;
+        if(isset($_POST['so_luong'][0])){
         for ($x = 0; $x <= sizeof($_POST["so_luongs"]); $x++) {
             $tong_tien+= $_POST["so_luongs"][$x]*$_POST["gia_mons"][$x];
 
@@ -44,6 +45,7 @@
 
         }
         update_ban_1($So_ban, $ma_hoa_don);
+    }
         header("Location: .?choose_ban=$So_ban");
         header("Location: ./home.php");
     }
@@ -314,7 +316,7 @@
             <div style="font-weight: bold; padding-left:65%" class="tong_tien">Tổng:
             <?php echo $don_gia/(1-$giam); ?>
             </div>
-            <div style="font-weight: bold; padding-left:65%" class="tong_tien">Thành tiền:
+            <div style="font-weight: bold; padding-left:65%" class="tong_tien2">Thành tiền:
             <?php echo $don_gia; ?>
             </div>
             <input type="hidden" name="tong_tien" value='<?php echo $don_gia; ?>'>
