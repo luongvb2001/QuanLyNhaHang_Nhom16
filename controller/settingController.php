@@ -103,4 +103,27 @@
         $statement->execute();
         $statement->closeCursor();
     }
+
+    function delete_ban($so_ban) {
+        global $db;
+        $query = 'UPDATE ban
+        SET DEL=1
+        WHERE SO_BAN = :so_ban;';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':so_ban', $so_ban);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+
+    function update_ban($so_ban) {
+        global $db;
+        $query = 'UPDATE ban
+        SET DEL=0
+        WHERE SO_BAN = :so_ban;';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':so_ban', $so_ban);
+        $statement->execute();
+        $statement->closeCursor();
+    }
+        
 ?>
