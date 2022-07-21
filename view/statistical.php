@@ -24,7 +24,7 @@
 			<div class="wrapper">
 				<div class="chart-container1">
 					<canvas id="bar1" class="bar_chart1" style="max-height:217px; width:100%; max-width:80%; margin: 20px auto;"></canvas>
-					<p>Biểu đồ đường doanh thu của nhà hàng theo ngày trong tháng</p>
+					<p>Biểu đồ cột doanh thu của nhà hàng theo ngày trong tháng</p>
 				</div>
 				<div class="chart-container2 ">
 					<canvas id="doughnut_chart1" style="width:100%;  max-height:253px;"></canvas>
@@ -41,7 +41,7 @@
 			<div class="wrapper">
 				<div class="chart-container1">
 					<canvas id="bar2" class="bar_chart1" style="max-height:217px; width:100%; max-width:80%; margin: 20px auto; color: #ccc"></canvas>
-					<p>Biểu đồ đường doanh thu của nhà hàng theo tháng trong năm</p>
+					<p>Biểu đồ cột doanh thu của nhà hàng theo tháng trong năm</p>
 				</div>
 				<div class="chart-container2">
 					<canvas id="doughnut_chart2" style="width:100%"></canvas>
@@ -58,7 +58,7 @@
 			<div class="wrapper">
 				<div class="chart-container1">
 					<canvas id="bar3" class="bar_chart1" style="max-height:217px; width:100%; max-width:80%; margin: 20px auto;"></canvas>
-					<p>Biểu đồ đường doanh thu của nhà hàng theo các năm</p>
+					<p>Biểu đồ cột doanh thu của nhà hàng theo các năm</p>
 				</div>
 				<div class="chart-container2">
 					<canvas id="doughnut_chart3" style="width:100%"></canvas>
