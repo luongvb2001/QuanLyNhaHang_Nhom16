@@ -91,7 +91,7 @@
 
 		function makechart(x, y) {
 			$.ajax({
-				url: "../model/data.php",
+				url: "../controller/dataController.php",
 				method: "POST",
 				data: {
 					action: 'fetch' + x[x.length - 1]
